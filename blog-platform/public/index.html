@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NEBULA — Blog Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="grid-bg"></div>
+  <div id="toastBox"></div>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="orb"></span>
+      <h1>NEBULA</h1>
+    </div>
+    <div id="authSection" class="auth-controls">
+      <span id="userGreeting" class="hidden"></span>
+      <button id="loginBtn" class="btn btn-ghost" onclick="showLogin()">Sign in</button>
+      <button id="registerBtn" class="btn btn-ghost" onclick="showRegister()">Join</button>
+      <button id="newPostBtn" class="btn btn-neon hidden" onclick="showNewPost()">+ New Post</button>
+      <button id="logoutBtn" class="btn btn-ghost hidden" onclick="logout()">Sign out</button>
+    </div>
+  </header>
+
+  <div id="overlay" class="overlay hidden" onclick="closeModals()"></div>
+
+  <!-- LOGIN -->
+  <div id="loginForm" class="modal hidden">
+    <button class="modal-close" onclick="closeModals()">&times;</button>
+    <p class="eyebrow">// access_terminal</p>
+    <h2>Sign in</h2>
+    <label>Email<input type="email" id="loginEmail" placeholder="you@nebula.io" /></label>
+    <label>Password<input type="password" id="loginPassword" placeholder="••••••••" /></label>
+    <button class="btn btn-neon btn-block" onclick="login()">Sign in</button>
+    <p class="switch-line">No account? <a onclick="showRegister()">Join Nebula</a></p>
+  </div>
+
+  <!-- REGISTER -->
+  <div id="registerForm" class="modal hidden">
+    <button class="modal-close" onclick="closeModals()">&times;</button>
+    <p class="eyebrow">// new_identity</p>
+    <h2>Join Nebula</h2>
+    <label>Name<input type="text" id="regName" placeholder="Your name" /></label>
+    <label>Email<input type="email" id="regEmail" placeholder="you@nebula.io" /></label>
+    <label>Password<input type="password" id="regPassword" placeholder="••••••••" /></label>
+    <button class="btn btn-neon btn-block" onclick="register()">Create account</button>
+    <p class="switch-line">Already in? <a onclick="showLogin()">Sign in</a></p>
+  </div>
+
+  <!-- NEW / EDIT POST -->
+  <div id="postForm" class="modal modal-wide hidden">
+    <button class="modal-close" onclick="closeModals()">&times;</button>
+    <p class="eyebrow" id="postFormEyebrow">// compose</p>
+    <h2 id="postFormTitle">New Transmission</h2>
+    <label>Title<input type="text" id="postTitle" placeholder="Give it a title" /></label>
+    <label>Tags <span class="hint">(comma separated)</span><input type="text" id="postTags" placeholder="tech, thoughts, code" /></label>
+    <label>Content<textarea id="postContent" rows="7" placeholder="Write something worth transmitting..."></textarea></label>
+    <input type="hidden" id="editingPostId" />
+    <button class="btn btn-neon btn-block" onclick="submitPost()">Publish</button>
+  </div>
+
+  <main>
+    <section class="hero">
+      <h2>Signals from the collective</h2>
+      <p>A feed of thoughts, code, and ideas — broadcast by anyone, read by everyone.</p>
+    </section>
+
+    <div id="postList" class="post-grid"></div>
+  </main>
+
+  <!-- SINGLE POST VIEW -->
+  <div id="postView" class="post-view hidden">
+    <div class="post-view-inner">
+      <button class="btn btn-ghost" onclick="closePostView()">← Back to feed</button>
+      <article id="postViewContent"></article>
+      <section class="comments-section">
+        <p class="eyebrow">// comments</p>
+        <h3>Discussion</h3>
+        <div id="commentComposer" class="comment-composer hidden">
+          <textarea id="commentText" rows="2" placeholder="Add to the discussion..."></textarea>
+          <button class="btn btn-neon" onclick="submitComment()">Send</button>
+        </div>
+        <div id="commentList"></div>
+      </section>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>NEBULA — built for Thiranex Task #4</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
